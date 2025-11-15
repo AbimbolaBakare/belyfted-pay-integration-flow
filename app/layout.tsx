@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeToggle } from "@/components/ui";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -11,7 +12,8 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Belyfted Pay Integration Flow",
-  description: "Pay seamlessly with Belyfted Pay: Fast and secure wallet payments",
+  description:
+    "Pay seamlessly with Belyfted Pay: Fast and secure wallet payments",
 };
 
 export default function RootLayout({
@@ -22,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${montserrat.variable} antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ThemeToggle />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

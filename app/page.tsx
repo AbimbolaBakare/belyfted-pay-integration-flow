@@ -33,7 +33,7 @@ export default function Home() {
 
   const handlePayment = () => {
     if (!isPaymentAvailable) return;
-    console.log("Payment method:", selectedMethod);
+    window.location.href = "/payment/method";
   };
 
   const getButtonText = () => {
@@ -45,8 +45,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-8 md:px-8">
-      <ThemeToggle />
-
       <div className="w-full max-w-lg space-y-10">
         <div>
           <h1 className="text-3xl font-semibold text-neutral-800 dark:text-neutral-50">
