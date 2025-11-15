@@ -24,6 +24,7 @@ export default function ConfirmPaymentPage() {
   const [showWalletDropdown, setShowWalletDropdown] = useState(false);
   const [showPinModal, setShowPinModal] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [pinError, setPinError] = useState("");
 
   useEffect(() => {
     if (!user) {
@@ -49,11 +50,20 @@ export default function ConfirmPaymentPage() {
   };
 
   const handlePinConfirm = async (pin: string) => {
+    setPinError("");
     setIsProcessing(true);
     await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsProcessing(false);
-    setShowPinModal(false);
-    router.push("/payment/success");
+
+    if (pin === "1234") {
+      setShowPinModal(false);
+      router.push("/payment/success");
+    } else if (pin === "0000") {
+      setShowPinModal(false);
+      router.push("/payment/failed");
+    } else {
+      setPinError("Incorrect PIN. Please try again.");
+    }
   };
 
   const handlePinClose = () => {
@@ -202,6 +212,7 @@ export default function ConfirmPaymentPage() {
           onClose={handlePinClose}
           onConfirm={handlePinConfirm}
           isLoading={isProcessing}
+          error={pinError}
         />
       )}
     </div>
