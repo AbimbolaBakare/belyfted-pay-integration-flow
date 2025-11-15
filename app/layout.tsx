@@ -14,6 +14,29 @@ export const metadata: Metadata = {
   title: "Belyfted Pay Integration Flow",
   description:
     "Pay seamlessly with Belyfted Pay: Fast and secure wallet payments",
+  keywords: [
+    "payment gateway",
+    "wallet payment",
+    "secure checkout",
+    "belyfted",
+    "multi-currency",
+  ],
+  authors: [{ name: "Belyfted" }],
+  openGraph: {
+    title: "Belyfted Pay - Secure Payment Integration",
+    description: "Fast and secure wallet payments with Belyfted Pay",
+    type: "website",
+    locale: "en_GB",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Belyfted Pay",
+    description: "Secure wallet payments made easy",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
