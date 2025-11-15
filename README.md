@@ -34,6 +34,11 @@ npm run build
 npm start
 ```
 
+### Run Tests
+```bash
+npm test
+```
+
 ## Testing the Flow
 
 ### User Credentials
