@@ -1,9 +1,16 @@
-import { Button, Input, Radio } from "@/components/ui";
+"use client";
+
+import { Button, Input, Radio, ThemeToggle } from "@/components/ui";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center px-5 md:px-0">
+      <ThemeToggle />
       <div>
+        <div className="mb-8 flex justify-center">
+          <Image src="/assets/logo.svg" alt="Belyfted" width={100} height={100} />
+        </div>
         <Button variant="primary">Hello there</Button>
         <Button variant="secondary" isLoading>
           Hello there

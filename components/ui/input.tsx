@@ -25,7 +25,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             ref={ref}
             type={inputType}
-            className={`w-full px-6 py-3 rounded-lg border border-neutral-300 bg-white text-neutral-800 text-sm placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:placeholder:text-neutral-600 ${
+            className={`w-full px-6 py-3 rounded-lg border border-neutral-300 bg-white  text-neutral-800 text-sm placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-300 dark:placeholder:text-neutral-600 ${
               error ? "border-red-500 focus:ring-red-500" : ""
             } ${className}`}
             {...props}
