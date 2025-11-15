@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 import { Wallet } from "@/lib/types/payment";
+import { User } from "@/lib/types/auth";
 
 interface PaymentContextType {
   amount: number;
@@ -9,11 +10,13 @@ interface PaymentContextType {
   merchantName: string;
   selectedWallet: Wallet | null;
   isAuthenticated: boolean;
+  user: User | null;
   setAmount: (amount: number) => void;
   setCurrency: (currency: string) => void;
   setMerchantName: (name: string) => void;
   setSelectedWallet: (wallet: Wallet | null) => void;
   setIsAuthenticated: (isAuth: boolean) => void;
+  setUser: (user: User | null) => void;
 }
 
 const PaymentContext = createContext<PaymentContextType | undefined>(undefined);
@@ -24,6 +27,7 @@ export const PaymentProvider = ({ children }: { children: ReactNode }) => {
   const [merchantName, setMerchantName] = useState<string>("Jumia Limited");
   const [selectedWallet, setSelectedWallet] = useState<Wallet | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
 
   return (
     <PaymentContext.Provider
@@ -33,11 +37,13 @@ export const PaymentProvider = ({ children }: { children: ReactNode }) => {
         merchantName,
         selectedWallet,
         isAuthenticated,
+        user,
         setAmount,
         setCurrency,
         setMerchantName,
         setSelectedWallet,
         setIsAuthenticated,
+        setUser,
       }}
     >
       {children}

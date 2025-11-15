@@ -11,7 +11,7 @@ import { ApiError } from "@/lib/api/client";
 
 export default function SignInPage() {
   const router = useRouter();
-  const { amount, currency, merchantName, setIsAuthenticated } = usePayment();
+  const { amount, currency, merchantName, setIsAuthenticated, setUser } = usePayment();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,8 @@ export default function SignInPage() {
     setError("");
 
     try {
-      await authService.signIn({ email, password });
+      const user = await authService.signIn({ email, password });
+      setUser(user);
       setIsAuthenticated(true);
       router.push("/payment/confirm");
     } catch (err) {

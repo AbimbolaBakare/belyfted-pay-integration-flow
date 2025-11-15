@@ -4,6 +4,7 @@
 
 @theme {
   --color-primary-500: #042656;
+  --color-primary-100: #c4cedc;
   --color-primary-50: #dce3ed;
   --color-primary-0: #f4f8fe;
 
@@ -24,6 +25,7 @@
   --color-yellow-light: #fbe0b6;
   --color-yellow-normal: #f39c12;
   --color-yellow-light-hover: #fdf0db;
+  --color-yellow-darker: #553706;
 
   --color-background: #f8f9fd;
 }
