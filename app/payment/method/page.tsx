@@ -10,7 +10,7 @@ export default function PaymentMethodPage() {
   const { amount, currency, merchantName } = usePayment();
 
   const handlePayWithWallet = () => {
-    console.log("Pay with wallet clicked");
+    router.push("/payment/signin");
   };
 
   const handleChangePaymentMethod = () => {
