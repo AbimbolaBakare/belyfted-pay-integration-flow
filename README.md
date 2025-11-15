@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Belyfted Pay Integration Flow
 
-## Getting Started
+An implementation of the Belyfted Pay payment integration flow, built with Next.js, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Setup Instructions
 
+### Prerequisites
+- Node.js 18+ installed
+- npm package manager
+
+### Installation
+
+1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd belyfted-pay-integration-flow
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+### Build for Production
+```bash
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Testing the Flow
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### User Credentials
+- **Email**: `user@example.com` or `bimms@belyfted.com`
+- **Password**: `password123`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### PIN Testing
+- **Success**: Enter `1234`
+- **Failed**: Enter `0000`
+- **Invalid**: Any other PIN shows error in modal
 
-## Deploy on Vercel
+### Wallets
+- GBP Wallet
+- NGN Wallet
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Core
+- **Next.js 16** - React framework with App Router
+- **TypeScript** - Type safety and better DX
+- **Tailwind CSS v4** - Styling with CSS-first configuration
+
+### State Management
+- **React Context API** - Global payment state management
+
+### Architecture
+- **Next.js API Routes** - Backend API for authentication
+- **Service Layer Pattern** - Separation of concerns
+- **Component-Based Architecture** - Reusable UI components
+
+## Implementation Decisions
+
+### 1. Routing Strategy
+- **Main checkout page**: Full route (`/`)
+- **Payment flow pages**: Full routes (`/payment/method`, `/payment/signin`, `/payment/confirm`)
+- **PIN entry**: Modal overlay
+- **Result pages**: Separate routes (`/payment/success`, `/payment/failed`, `/payment/redirect`)
+
+### 2. Dark Mode Implementation
+- Class-based dark mode (`.dark` class)
+- Manual toggle
+- Persistent via localStorage
+
+**Rationale**: User control over theme, future-proof for system preference feature.
+
+### 3. Authentication Architecture
+```
+Component → Service Layer → API Client → Next.js API Route → Mock Data
+```
+
+**Rationale**: 
+- Separation of concerns
+- Easy to swap mock data with real API
+- Testable layers
+- Secure (passwords only on server-side)
+
+### 4. Currency Conversion Feature
+- Automatic detection when wallet currency ≠ payment currency
+- Fixed exchange rate for demo
+
+**Rationale**: Real-world payment scenario handling multiple currencies.
+
+### 5. Component Structure
+- **Atomic Design**: Button, Input, Radio, Spinner, Alert
+- **Feature Components**: WalletDropdown, CurrencyConversionBox, PinModal
+- **Page Components**: Full payment flow pages
+
+**Rationale**: Reusability, maintainability, and scalability.
+
+### 6. Responsive Design
+- Mobile-first approach
+- Breakpoint: `md:` (768px+)
+- Fluid typography and spacing
+
+**Rationale**: Multi-device support from the start.
+```
+
+### Possible Improvements with More Time
+- Implement JWT-based authentication
+- Implement proper session management
+- Add route guards
+- Proper Unit tests (Jest + React Testing Library)
+- Session persistence
