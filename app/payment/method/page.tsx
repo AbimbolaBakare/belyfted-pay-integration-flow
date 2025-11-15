@@ -3,12 +3,11 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { formatCurrency } from "@/lib/utils";
+import { usePayment } from "@/context/payment-context";
 
 export default function PaymentMethodPage() {
   const router = useRouter();
-  const amount = 12000.0;
-  const currency = "GBP";
-  const merchantName = "Jumia Limited";
+  const { amount, currency, merchantName } = usePayment();
 
   const handlePayWithWallet = () => {
     console.log("Pay with wallet clicked");
