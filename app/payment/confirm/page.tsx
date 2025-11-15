@@ -9,6 +9,7 @@ import { formatCurrency, getCurrencyIcon } from "@/lib/utils";
 import { Wallet } from "@/lib/types/payment";
 import { WalletDropdown } from "@/components/payment/wallet-dropdown";
 import { CurrencyConversionBox } from "@/components/payment/currency-conversion-box";
+import { PinModal } from "@/components/payment/pin-modal";
 
 export default function ConfirmPaymentPage() {
   const router = useRouter();
@@ -21,6 +22,8 @@ export default function ConfirmPaymentPage() {
     user,
   } = usePayment();
   const [showWalletDropdown, setShowWalletDropdown] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -41,8 +44,20 @@ export default function ConfirmPaymentPage() {
 
   const handleConfirmPayment = () => {
     if (!hasInsufficientBalance) {
-      console.log("Opening PIN modal...");
+      setShowPinModal(true);
     }
+  };
+
+  const handlePinConfirm = async (pin: string) => {
+    setIsProcessing(true);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setIsProcessing(false);
+    setShowPinModal(false);
+    router.push("/payment/success");
+  };
+
+  const handlePinClose = () => {
+    setShowPinModal(false);
   };
 
   const handleCancelPayment = () => {
@@ -181,6 +196,14 @@ export default function ConfirmPaymentPage() {
           Your transaction is secured by Belyfted&apos;s encryption protocols.
         </p>
       </div>
+
+      {showPinModal && (
+        <PinModal
+          onClose={handlePinClose}
+          onConfirm={handlePinConfirm}
+          isLoading={isProcessing}
+        />
+      )}
     </div>
   );
 }
